@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مسار امداد للابتعاث 2025-2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+
+        .search-bar {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .tabs {
+            display: flex;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 15px 20px;
+            margin: 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .tab-btn:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .content-section {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .field-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .field-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 20px;
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .field-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .field-title {
+            color: #2c3e50;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .field-title::before {
+            content: "📚";
+            margin-left: 10px;
+        }
+
+        .specializations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .spec-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            border-right: 3px solid #667eea;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .spec-item:hover {
+            background: #f8f9ff;
+            transform: translateX(-5px);
+        }
+
+        .spec-arabic {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .spec-english {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        .master-only {
+            background: #fff3cd;
+            border-color: #ffc107;
+        }
+
+        .master-only::after {
+            content: "ماجستير فقط";
+            background: #ffc107;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7em;
+            margin-right: 10px;
+        }
+
+        .university-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .university-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .university-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .university-rank {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .university-name {
+            color: #2c3e50;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab-btn {
+                margin: 2px 0;
+            }
+            
+            .field-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>مسار امداد للابتعاث</h1>
+            <p class="subtitle">العام الأكاديمي 2025-2026 | دليل المجالات التعليمية والجامعات العالمية</p>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="🔍 ابحث عن تخصص أو جامعة...">
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('overview')">نظرة عامة</button>
+            <button class="tab-btn" onclick="showTab('specializations')">التخصصات</button>
+            <button class="tab-btn" onclick="showTab('humanities')">الفنون والعلوم الإنسانية</button>
+            <button class="tab-btn" onclick="showTab('social')">العلوم الاجتماعية</button>
+            <button class="tab-btn" onclick="showTab('business')">الأعمال والإدارة</button>
+            <button class="tab-btn" onclick="showTab('sciences')">العلوم الطبيعية</button>
+            <button class="tab-btn" onclick="showTab('ict')">تقنية المعلومات والاتصالات</button>
+            <button class="tab-btn" onclick="showTab('engineering')">الهندسة والتصنيع والبناء</button>
+            <button class="tab-btn" onclick="showTab('agri')">الزراعة والحراجة</button>
+            <button class="tab-btn" onclick="showTab('services')">الخدمات</button>
+        </div>
+
+        <!-- نظرة عامة -->
+        <div id="overview" class="content-section active">
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">المجالات التعليمية</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">التخصصات المتاحة</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">400+</div>
+                    <div class="stat-label">الجامعات العالمية</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2025-2026</div>
+                    <div class="stat-label">العام الأكاديمي</div>
+                </div>
+            </div>
+                        <div style="margin-bottom: 30px;">
+                <h3 style="color:#2c3e50; margin: 20px 0 10px;">عن المسار</h3>
+                <p>
+                    يهدف <strong>مسار إمداد</strong> في برنامج خادم الحرمين الشريفين للابتعاث إلى سد حاجة سوق العمل من خلال ابتعاث الطلاب إلى أفضل 200 جامعة ومعهد في العالم في مجالات محددة ذات احتياج عالي في سوق العمل، وذلك للراغبين بإكمال مرحلة <strong>البكالوريوس</strong> أو <strong>الماجستير</strong>.
+                </p>
+
+                <h3 style="color:#2c3e50; margin: 20px 0 10px;">الدرجات العلمية</h3>
+                <p>يستهدف مسار إمداد درجة <strong>الماجستير</strong> ودرجة <strong>البكالوريوس</strong>.</p>
+
+                <h3 style="color:#2c3e50; margin: 20px 0 10px;">نمط الدراسة</h3>
+                <p>يدعم مسار إمداد <strong>نمط الدراسة الحضوري</strong>.</p>
+
+                <h3 style="color:#2c3e50; margin: 20px 0 10px;">الشروط الخاصة بالمسار</h3>
+                <ul style="padding-right: 20px; line-height: 1.8;">
+                    <li>أن يكون القبول في أفضل 200 مؤسسة تعليمية حسب قائمة البرنامج في هذا المسار.</li>
+                    <li>أن يكون القبول نهائيًا غير مشروط وصادرًا من مكتب القبول والتسجيل في الجامعة المعتمدة في قائمة البرنامج.</li>
+                    <li>إذا كانت الدولة غير ناطقة باللغة الإنجليزية فيُسمح بالقبول المشروط بدراسة لغة الدولة، ويُتاح الابتعاث لدراسة اللغة.</li>
+                </ul>
+
+                <h3 style="color:#2c3e50; margin: 30px 0 10px;">شروط خاصة ببعض الدول</h3>
+                <h4 style="margin: 15px 0 5px; color:#764ba2;">الصين</h4>
+                <ul style="padding-right: 20px; line-height: 1.8;">
+                    <li>للبكالوريوس: ألا يتجاوز عمر المتقدم 30 عامًا.</li>
+                    <li>للبكالوريوس: ألا يقل المعدل التراكمي في الثانوية العامة عن 85%.</li>
+                    <li>للبكالوريوس: ألا تقل درجة اختبار IELTS عن 4.5.</li>
+                    <li>للماجستير: ألا يقل المعدل عن (2.75 من 4) أو (3.75 من 5) أو (80 من 100).</li>
+                    <li>للماجستير: ألا تقل درجة اختبار IELTS عن 4.5.</li>
+                </ul>
+                <h5 style="margin: 10px 0 5px; color:#764ba2;">لدراسة السنة التحضيرية</h5>
+                <ul style="padding-right: 20px; line-height: 1.8;">
+                    <li>أن يكون المعدل التراكمي في الثانوية العامة لا يقل عن 90%.</li>
+                    <li>أن تكون درجة اختبار اللغة (IELTS) لا تقل عن 5.5.</li>
+                </ul>
+
+                <h4 style="margin: 20px 0 5px; color:#764ba2;">ألمانيا</h4>
+                <ul style="padding-right: 20px; line-height: 1.8;">
+                    <li>الحصول على شهادة <strong>A2</strong> في اللغة الألمانية كلغة أجنبية.</li>
+                </ul>
+
+                <hr style="margin: 40px 0; border: none; border-top: 1px solid #ccc;">
+                <p style="text-align:center; font-size: 0.9em; color: #777;">
+                    هذا الموقع غير رسمي ولا يتبع أي جهة حكومية. تم تطويره بواسطة <strong>Scold</strong> لأغراض تعليمية وتجريبية.
+                </p>
+            </div>
+            <h2 style="color: #2c3e50; margin-bottom: 20px;"></h2>
+            <div class="field-grid" id="overviewFields">
+                <!-- سيتم ملء البطاقات تلقائيًا لاحقًا -->
+            </div>
+        </div>
+
+        <!-- التخصصات -->
+        <div id="specializations" class="content-section">
+            <h2 style="color: #2c3e50; margin-bottom: 20px;">جميع التخصصات المتاحة</h2>
+            <div id="allSpecializations">
+                <!-- سيتم ملء التخصصات حسب المجال -->
+            </div>
+        </div>
+
+        <!-- بقية التبويبات -->
+        <div id="humanities" class="content-section">
+            <h2 style="color: #2c3e50; margin-bottom: 20px;">أفضل الجامعات العالمية - الفنون والعلوم الإنسانية</h2>
+            <div class="university-grid" id="humanitiesUniversities"></div>
+        </div>
+
+        <div id="social" class="content-section">
+            <h2 style="color: #2c3e50; margin-bottom: 20px;">أفضل الجامعات العالمية - العلوم الاجتماعية والإعلام</h2>
+            <div class="university-grid" id="socialUniversities"></div>
+        </div>
+
+        <div id="business" class="content-section">
+            <h2 style="color: #2c3e50; margin-bottom: 20px;">أفضل الجامعات العالمية - الأعمال والإدارة والقانون</h2>
+            <div class="university-grid" id="businessUniversities"></div>
+        </div>
+
+        <div id="sciences" class="content-section">
+            <h2 style="color: #2c3e50; margin-bottom: 20px;">أفضل الجامعات العالمية - العلوم الطبيعية والرياضيات</h2>
+            <div class="university-grid" id="sciencesUniversities"></div>
+        </div>
+
+        <div id="ict" class="content-section">
+            <h2 style="color: #2c3e50; margin-bottom: 20px;">أفضل الجامعات العالمية - تقنية المعلومات والاتصالات</h2>
+            <div class="university-grid" id="ictUniversities"></div>
+        </div>
+
+        <div id="engineering" class="content-section">
+            <h2 style="color: #2c3e50; margin-bottom: 20px;">أفضل الجامعات العالمية - الهندسة والتصنيع والبناء</h2>
+            <div class="university-grid" id="engineeringUniversities"></div>
+        </div>
+        <div id="agri" class="content-section">
+            <h2 style="color: #2c3e50; margin-bottom: 20px;">أفضل الجامعات العالمية - الزراعة والحراجة</h2>
+            <div class="university-grid" id="agriUniversities"></div>
+        </div>
+            <div id="services" class="content-section">
+            <h2 style="color: #2c3e50; margin-bottom: 20px;">أفضل الجامعات العالمية - الخدمات</h2>
+            <div class="university-grid" id="servicesUniversities"></div>
+        </div>
+    <script>
+        let allFields = {};
+
+        async function loadJSON() {
+            try {
+                const res = await fetch("im.json");
+                const data = await res.json();
+                allFields = data.supply_track.educational_fields;
+                loadAllSpecializations();
+            } catch (error) {
+                console.error("فشل تحميل im.json:", error);
+            }
+        }
+
+        function showTab(tabName) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            loadTabData(tabName);
+        }
+
+        function loadTabData(tabName) {
+            if (tabName === 'specializations') loadAllSpecializations();
+            else loadUniversities(tabName);
+        }
+
+        function loadAllSpecializations() {
+            const container = document.getElementById('allSpecializations');
+            if (!container || !allFields) return;
+            container.innerHTML = '';
+            Object.values(allFields).forEach(field => {
+                if (!field.specializations || !field.specializations.length) return;
+
+                const section = document.createElement('div');
+                section.style.marginBottom = '30px';
+
+                const title = document.createElement('h3');
+                title.textContent = field.name_arabic;
+                title.style.color = '#2c3e50';
+                title.style.marginBottom = '10px';
+
+                const specsGrid = document.createElement('div');
+                specsGrid.style.display = 'flex';
+                specsGrid.style.flexDirection = 'column';
+                specsGrid.style.rowGap = '10px';
+
+                field.specializations.forEach(spec => {
+                    const isMasterOnly = spec.note && spec.note.includes("الماجستير");
+                    const specDiv = document.createElement('div');
+                    specDiv.className = `spec-item ${isMasterOnly ? 'master-only' : ''}`;
+                    specDiv.innerHTML = `
+                        <div class="spec-arabic">${spec.name_arabic}</div>
+                        <div class="spec-english">${spec.name_english}</div>
+                    `;
+                    specsGrid.appendChild(specDiv);
+                });
+
+                section.appendChild(title);
+                section.appendChild(specsGrid);
+                container.appendChild(section);
+            });
+        }
+
+        function loadUniversities(fieldKey) {
+            let fieldMap = {
+                humanities: 'arts_and_humanities',
+                social: 'social_sciences_journalism_information',
+                business: 'business_administration_law',
+                sciences: 'natural_sciences_mathematics_statistics',
+                ict: 'information_communication_technologies',
+                engineering: 'engineering_manufacturing_construction',
+                agri: 'agriculture_forestry_fisheries_veterinary',
+                services: 'services'
+            };
+
+            const mappedKey = fieldMap[fieldKey];
+            const container = document.getElementById(fieldKey + 'Universities');
+            if (!container || !allFields[mappedKey]) {
+                console.warn("المجال غير موجود أو لا يحتوي على جامعات:", fieldKey);
+                container.innerHTML = '<p>لا توجد بيانات جامعات لهذا المجال.</p>';
+                return;
+            }
+
+            const rankings = allFields[mappedKey].university_rankings;
+            container.innerHTML = '';
+
+            if (!rankings || !rankings.length) {
+                container.innerHTML = '<p>لا توجد جامعات مدرجة.</p>';
+                return;
+            }
+
+            rankings.slice(0, 255).forEach(uni => {
+                const uniDiv = document.createElement('div');
+                uniDiv.className = 'university-card';
+                uniDiv.innerHTML = `
+                    <div class="university-rank">#${uni.rank}</div>
+                    <div class="university-name">${uni.name}</div>
+                `;
+                container.appendChild(uniDiv);
+            });
+        }
+
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const term = e.target.value.toLowerCase();
+
+            if (document.getElementById('specializations').classList.contains('active')) {
+                document.querySelectorAll('#allSpecializations .spec-item').forEach(item => {
+                    const text = item.textContent.toLowerCase();
+                    item.style.display = text.includes(term) ? 'block' : 'none';
+                });
+            }
+
+            ['humanities', 'social', 'business', 'sciences', 'ict', 'engineering','agri','services'].forEach(key => {
+                if (document.getElementById(key).classList.contains('active')) {
+                    document.querySelectorAll(`#${key}Universities .university-card`).forEach(item => {
+                        const text = item.textContent.toLowerCase();
+                        item.style.display = text.includes(term) ? 'block' : 'none';
+                    });
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', loadJSON);
+    </script>
+</body>
+</html>
